@@ -5,12 +5,12 @@
 Пользователю при первом входе в игру будет дана начальная сумма, дальше все зависит от него. Проиграет ли он все, или сорвет джекпот?
 ## На что похоже
 **AZINO 777**:
-- [Официальный сайт](https://www.ngv7w-azino777.icu/ru "Официальный сайт")
-- ![Картинка](http://uvao.ru/uploads/posts/2018-08/1533469912_screenshot-1.png "Подсказка")
+- [Официальный сайт](https://www.ngv7w-azino777.icu/ru "AZINO 777")
+- ![Картинка](http://uvao.ru/uploads/posts/2018-08/1533469912_screenshot-1.png "AZINO 777")
 
 **UP-X**:
-- [Официальный сайт](https://up2xf6x.xyz/ "Официальный сайт")
-- ![Картинка](https://forum.bits.media/uploads/monthly_2022_05/L5W5nKEaAC4.jpg.1df255e04a284836a9641301c458e65e.jpg "Подсказка")
+- [Официальный сайт](https://up2xf6x.xyz/ "UP-X")
+- ![Картинка](https://forum.bits.media/uploads/monthly_2022_05/L5W5nKEaAC4.jpg.1df255e04a284836a9641301c458e65e.jpg "UP-X")
 ## Авторы проекта
 ### [Александр Смирнов](https://github.com/lilApril)
 Капибара
