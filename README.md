@@ -6,8 +6,15 @@
 ## На что похоже
 **AZINO 777**:
 - [Официальный сайт](https://www.ngv7w-azino777.icu/ru/ "Официальный сайт")
-- ![Картинка](https://footballufo.ru/wp-content/uploads/2021/07/asino777.jpg "Подсказка")
+- ![Картинка](http://uvao.ru/uploads/posts/2018-08/1533469912_screenshot-1.png "Подсказка")
 
 **UP-X**:
 - [Официальный сайт](https://www.ngv7w-azino777.icu/ru/](https://up2xf6x.xyz/) "Официальный сайт")
 - ![Картинка](https://forum.bits.media/uploads/monthly_2022_05/L5W5nKEaAC4.jpg.1df255e04a284836a9641301c458e65e.jpg "Подсказка")
+## Авторы проекта
+### [Александр Смирнов](https://github.com/lilApril)
+Капибара
+### [Полина Митрохова](https://github.com/paullyaw)
+Капибара
+### [Арсений Якубовский](https://github.com/hunter3470)
+Капибара
