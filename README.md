@@ -19,3 +19,5 @@
 Капибара
 ### [Арсений Якубовский](https://github.com/hunter3470)
 Капибара
+
+![Картинка](https://telegram.org.ru/uploads/posts/2017-11/1509988718_file_192831.jpg "VITYA AK")
