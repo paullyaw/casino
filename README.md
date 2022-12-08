@@ -12,6 +12,11 @@
 **UP-X**:
 - [Официальный сайт](https://up2xf6x.xyz/ "UP-X")
 - ![Картинка](https://forum.bits.media/uploads/monthly_2022_05/L5W5nKEaAC4.jpg.1df255e04a284836a9641301c458e65e.jpg "UP-X")
+## Системные требования
+**Технологический стек**:
+- Язык программирования - Python
+- Библиотеки/модули - Pygame
+
 ## Авторы проекта
 ### [Александр Смирнов](https://github.com/lilApril)
 Капибара
