@@ -14,7 +14,10 @@
 - ![Картинка](https://forum.bits.media/uploads/monthly_2022_05/L5W5nKEaAC4.jpg.1df255e04a284836a9641301c458e65e.jpg "UP-X")
 ## Авторы проекта
 ### [Александр Смирнов](https://github.com/lilApril)
+Капибара
 ### [Полина Митрохова](https://github.com/paullyaw)
+Капибара
 ### [Арсений Якубовский](https://github.com/hunter3470)
+Капибара
 
 ![Картинка](https://telegram.org.ru/uploads/posts/2017-11/1509988718_file_192831.jpg "VITYA AK")
