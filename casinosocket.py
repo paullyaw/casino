@@ -15,11 +15,7 @@ idfromnumber - получить персональный айди-номер и�
 --------------------------------------
 второе слово - ключ, т.е. name|login|password|id|ids|text|profile|ipaddress соответственно то, что мы должны получить 
 или отправить
---------------------------------------
-возможнен и постфикс "fromid", который существует только
- из-за того, что я посчитал его употребление нужным.
-  он означает то, что мы работаем с единственным аргументом - id, по которому нам
-  надо получить один из ключей (см. второе слово)'''
+'''
 
 
 class socketprocessor:
@@ -43,8 +39,8 @@ class socketprocessor:
     def setchips(self, id, value):
         self.client.send(bytes(f"setchips|{id}|{value}", "utf-8"))
 
-    def entertogame(self, id):
-        self.client.send(bytes(f"entertogame|{id}", "utf-8"))
+    def entertogame(self, id, game):
+        self.client.send(bytes(f"entertogame|{id}|{game}", "utf-8"))
         return self.client.recv(2048)
 
     def ext(self):
@@ -55,14 +51,14 @@ class socketprocessor:
         return self.client.recv(2048)
 
     def getid(self, login, password):
-        self.client.send(bytes(f"getprofile|{login}|{password}", "utf-8"))
+        self.client.send(bytes(f"getid|{login}|{password}", "utf-8"))
         return self.client.recv(2048)
 
-    def setlogin(self, login, id):
-        self.client.send(bytes(f"setlogin|{login}|{id}", "utf-8"))
+    def setlogin(self, id, login):
+        self.client.send(bytes(f"setlogin|{id}|{login}", "utf-8"))
 
-    def setpassword(self, password, id):
-        self.client.send(bytes(f"setpassword|{password}|{id}", "utf-8"))
+    def setpassword(self, id, password):
+        self.client.send(bytes(f"setpassword|{id}|{password}", "utf-8"))
 
     def getstatus(self, id, window):
         self.client.send(bytes(f"getstatus|{id}|{window}", "utf-8"))

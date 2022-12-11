@@ -6,6 +6,7 @@ screen = pg.display.set_mode((384, 135))
 COLOR_INACTIVE = (255, 255, 255)
 COLOR_ACTIVE = (50, 50, 250)
 FONT = pg.font.Font(None, 32)
+BTNFONT = pg.font.Font(None, 24)
 
 class Button:
     def __init__(self, x, y, w, h, type, boxes):
@@ -13,23 +14,26 @@ class Button:
         self.color = (255, 255, 255)
         self.boxes = boxes
         self.type = type
-        self.txt_surface = FONT.render(type, True, self.color)
+        self.txt_surface = BTNFONT.render(type, True, COLOR_ACTIVE)
         self.active = False
 
     def handle_event(self, event):
         if event.type == pg.MOUSEBUTTONDOWN:
-            if all(list(map(lambda x: 1 if len(x.text) > 0 and x.text != 'login' and x.text != 'password' and x.text != 'server ip' else 0, self.boxes))):
-                socket = casinosocket.socketprocessor(self.boxes[2].text)
-                if self.type == 'registration':
-                    socket.registration(self.boxes[0], self.boxes[1])
-                elif self.type == 'login':
-                    socket.getid(self.boxes[0], self.boxes[1])
+            if self.rect.collidepoint(event.pos):
+                if all(list(map(lambda x: 1 if len(x.text) > 0 and x.text != 'login' and x.text != 'password' and x.text != 'server ip' else 0, self.boxes))):
+                    socket = casinosocket.socketprocessor(self.boxes[2].text)
+                    print(self.type)
+                    if self.type == 'reg':
+                        socket.registration(self.boxes[0], self.boxes[1])
+                        print(self.boxes[0].text, self.boxes[1].text, socket.getid(self.boxes[0].text, self.boxes[1].text).decode('utf-8'))
+                    elif self.type == 'log in':
+                        print(socket.getid(self.boxes[0].text, self.boxes[1].text).decode('utf-8'))
 
     def draw(self, screen):
+        # Blit the rect.
+        pg.draw.rect(screen, self.color, self.rect)
         # Blit the text.
         screen.blit(self.txt_surface, (self.rect.x + 5, self.rect.y + 5))
-        # Blit the rect.
-        pg.draw.rect(screen, self.color, self.rect, 2)
 
 class InputBox:
     def __init__(self, x, y, w, h, text=''):
