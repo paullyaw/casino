@@ -24,9 +24,9 @@
 # Путь пользователя
 # Пользовательский интерфейс
 ## Блэкджэк
-![image](https://user-images.githubusercontent.com/116737190/206901875-b30628d6-8e81-4199-86ff-5862f711fe23.png)
+![image](https://user-images.githubusercontent.com/116737190/206913031-6ee475aa-bc3a-457d-adb7-e633ce994606.png)
 ## Слоты
-![image](https://user-images.githubusercontent.com/116737190/206909939-73c836b2-cfae-4034-addd-4b3b99f2b410.png)
+![image](https://user-images.githubusercontent.com/116737190/206912854-3390b924-bee1-450d-a534-c2824a83e7d2.png)
 ## Покер
 ![image](https://user-images.githubusercontent.com/116737190/206912440-d4d48581-93a8-40dc-9641-8a79c3766ecb.png)
 # Программные интерфейсы
