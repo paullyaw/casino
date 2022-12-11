@@ -25,5 +25,7 @@
 # Пользовательский интерфейс
 ## Блэкджэк
 ![image](https://user-images.githubusercontent.com/116737190/206901875-b30628d6-8e81-4199-86ff-5862f711fe23.png)
+## Слоты
+![image](https://user-images.githubusercontent.com/116737190/206909186-fa28d84d-62f4-410c-8192-f33b3ad0edb4.png)
 # Программные интерфейсы
 # Нефункциональные требования
