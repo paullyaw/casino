@@ -51,6 +51,7 @@ class socketprocessor:
         return self.client.recv(2048)
 
     def getid(self, login, password):
+        print(login, password)
         self.client.send(bytes(f"getid|{login}|{password}", "utf-8"))
         return self.client.recv(2048)
 
@@ -66,3 +67,12 @@ class socketprocessor:
 
     def addchips(self, id, chips):
         self.client.send(bytes(f"addchips|{id}|{chips}", "utf-8"))
+
+    def currpokerevent(self, id, event):
+        self.client.send(bytes(f"currpokerevent|{id}|{event}", "utf-8"))
+
+    def currblackjackevent(self, id, event):
+        self.client.send(bytes(f"currblackjackevent|{id}|{event}", "utf-8"))
+
+    def sendcards(self, id, currentgame, cards):
+        self.client.send(bytes(f"sendcards|{id}|{currentgame}|{'|'.join(cards)}", "utf-8"))

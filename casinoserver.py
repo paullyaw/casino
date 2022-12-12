@@ -39,8 +39,8 @@ class manager:
     # тут что-то будет
 
     def getprofile(self, id):
-        self.client.send(bytes('|'.join(list(self.cur.execute(f"""SELECT (chips, username, password)
-                                                FROM profiletable WHERE id = {id}""").fetchall()[0])), 'utf-8'))
+        self.client.send(bytes('|'.join(list(map(str, self.cur.execute(f"""SELECT chips, username, password
+                                                FROM profiletable WHERE id = {id}""").fetchall()[0]))), 'utf-8'))
 
     # функция ищет профиль по логину паролю и номеру (реализуется при входе в аккаунт)
     def getid(self, login, password):
@@ -83,6 +83,19 @@ class manager:
         return str(self.cur.execute(f"""SELECT username
                                            FROM profiletable WHERE id = {id}""").fetchall()[0][0])
 
+    # Функция действий для покера
+    def currpokerevent(self, id, event):
+        pass
+
+    def currblackjackevent(self, id, event):
+        pass
+
+    def sendcards(self, id, currentgame, cards):
+        if currentgame == 'poker':
+            pass
+        elif currentgame == 'blackjack':
+            pass
+
 
 def activeserver(client, address, server):
     ex = manager(client)
@@ -116,6 +129,13 @@ def activeserver(client, address, server):
                             ex.getstatus(context[0], context[1])
                         if command == 'addchips':
                             ex.addchips(context[0], context[1])
+                        if command == 'currpokerevent':
+                            ex.currpokerevent(context[0], context[1])
+                        if command == 'currblackjackevent':
+                            ex.currblackjackevent(context[0], context[1])
+                        if command == 'sendcards':
+                            ex.sendcards(command[0], context[1], command[2:])
+
 
                 else:
                     client, address = server.accept()
