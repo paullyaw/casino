@@ -1,13 +1,22 @@
 import pygame as pg
 import casinosocket
 from mainwindow import mainwindow
+import os
 
 pg.init()
-screen = pg.display.set_mode((384, 135))
+screen = pg.display.set_mode((500, 400))
 COLOR_INACTIVE = (255, 255, 255)
 COLOR_ACTIVE = (50, 50, 250)
 FONT = pg.font.Font(None, 32)
 BTNFONT = pg.font.Font(None, 24)
+input_boxes = []
+
+
+def load_image(name):
+    fullname = os.path.join('pic', name)
+    image = pg.image.load(fullname)
+    return image
+
 
 class Button:
     def __init__(self, x, y, w, h, type, boxes):
@@ -23,14 +32,21 @@ class Button:
     def handle_event(self, event):
         if event.type == pg.MOUSEBUTTONDOWN:
             if self.rect.collidepoint(event.pos):
-                if all(list(map(lambda x: 1 if len(x.text) > 0 and x.text != 'login' and x.text != 'password' and x.text != 'server ip' else 0, self.boxes))):
+                if all(list(map(lambda x: 1 if len(
+                        x.text) > 0 and x.text != 'login' and x.text != 'password' and x.text != 'server ip' else 0,
+                                self.boxes))):
                     socket = casinosocket.socketprocessor(self.boxes[2].text)
                     if self.type == 'reg':
                         socket.registration(self.boxes[0], self.boxes[1])
-                        self.profile = (socket.getid(self.boxes[0].text, self.boxes[1].text).decode('utf-8'), socket.getprofile(socket.getid(self.boxes[0].text, self.boxes[1].text).decode('utf-8')))
+                        self.profile = (socket.getid(self.boxes[0].text, self.boxes[1].text).decode('utf-8'),
+                                        socket.getprofile(
+                                            socket.getid(self.boxes[0].text, self.boxes[1].text).decode('utf-8')))
                         self.done = True
+
                     elif self.type == 'log in':
-                        self.profile = (socket.getid(self.boxes[0].text, self.boxes[1].text).decode('utf-8'), socket.getprofile(socket.getid(self.boxes[0].text, self.boxes[1].text).decode('utf-8')))
+                        self.profile = (socket.getid(self.boxes[0].text, self.boxes[1].text).decode('utf-8'),
+                                        socket.getprofile(
+                                            socket.getid(self.boxes[0].text, self.boxes[1].text).decode('utf-8')))
                         print(self.profile)
                         self.done = True
 
@@ -39,6 +55,7 @@ class Button:
         pg.draw.rect(screen, self.color, self.rect)
         # Blit the text.
         screen.blit(self.txt_surface, (self.rect.x + 5, self.rect.y + 5))
+
 
 class InputBox:
     def __init__(self, x, y, w, h, text=''):
@@ -69,24 +86,30 @@ class InputBox:
 
     def update(self):
         # Resize the box if the text is too long.
-        width = max(200, self.txt_surface.get_width()+10)
+        width = max(200, self.txt_surface.get_width() + 10)
         self.rect.w = width
 
     def draw(self, screen):
         # Blit the text.
-        screen.blit(self.txt_surface, (self.rect.x+5, self.rect.y+5))
+        screen.blit(self.txt_surface, (self.rect.x + 5, self.rect.y + 5))
         # Blit the rect.
         pg.draw.rect(screen, self.color, self.rect, 2)
+
 
 class entrance:
     def render(self):
         pg.display.set_caption("Вход/Регистрация")
+        logo = load_image('logo.png')
+        pg.display.set_icon(logo)
         clock = pg.time.Clock()
-        input_box1 = InputBox(10, 10, 14, 32, 'login')
-        input_box2 = InputBox(10, 50, 14, 32, 'password')
-        input_box3 = InputBox(10, 90, 14, 32, 'server ip')
+        input_box1 = InputBox(150, 150, 14, 32, 'Login')
+        input_box2 = InputBox(150, 200, 14, 32, 'Password')
+        input_box3 = InputBox(150, 250, 14, 32, 'Server ip')
         input_boxes = [input_box1, input_box2, input_box3]
-        buttons = [Button(220, 10, 56, 56, 'log in', input_boxes), Button(220, 66, 56, 56, 'reg', input_boxes)]
+        font = pg.font.Font(None, 40)
+        text = font.render("Пиковая Дама", 1, (255, 255, 255))
+        text_x, text_y = 150, 80
+        buttons = [Button(170, 300, 56, 30, 'Log in', input_boxes), Button(270, 300, 56, 30, 'Reg', input_boxes)]
         done = False
 
         while not done:
@@ -99,16 +122,17 @@ class entrance:
                     btn.handle_event(event)
                     if btn.done:
                         pg.quit()
-                        window = mainwindow(btn.profile[0], btn.profile[1].decode('utf-8').split('|')[1], btn.profile[1].decode('utf-8').split('|')[2], btn.profile[1].decode('utf-8').split('|')[1])
+                        window = mainwindow(btn.profile[0], btn.profile[1].decode('utf-8').split('|')[1],
+                                            btn.profile[1].decode('utf-8').split('|')[2],
+                                            btn.profile[1].decode('utf-8').split('|')[1])
                         done = True
-
-
 
             if not done:
                 for box in input_boxes:
                     box.update()
 
                 screen.fill((10, 10, 30))
+                screen.blit(text, (text_x, text_y))
                 for box in input_boxes:
                     box.draw(screen)
                 for btn in buttons:
@@ -118,7 +142,6 @@ class entrance:
                 clock.tick(30)
 
 
-
-
-ex = entrance()
-ex.render()
+if __name__ == '__main__':
+    ex = entrance()
+    ex.render()
