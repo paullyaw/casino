@@ -1,8 +1,6 @@
 import pygame as pygame
 from blago_black import *
 from const import *
-import sys
-import time
 
 pygame.init()
 

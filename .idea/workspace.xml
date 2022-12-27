@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4808de0c-2bea-4d3d-962c-593bc7b4a23d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/front_jack.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blago_black.py" beforeDir="false" afterPath="$PROJECT_DIR$/blago_black.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/git" beforeDir="false" afterPath="$PROJECT_DIR$/const.py" afterDir="false" />
-    </list>
+    <list default="true" id="4808de0c-2bea-4d3d-962c-593bc7b4a23d" name="Changes" comment="!" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -93,6 +88,14 @@
       <option name="presentableId" value="Default" />
       <updated>1670762037040</updated>
     </task>
+    <task id="LOCAL-00001" summary="!">
+      <created>1672156299601</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1672156299601</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -105,5 +108,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="!" />
+    <option name="LAST_COMMIT_MESSAGE" value="!" />
   </component>
 </project>
