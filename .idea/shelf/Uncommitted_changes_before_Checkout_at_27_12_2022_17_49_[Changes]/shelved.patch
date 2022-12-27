@@ -1,0 +1,191 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"4808de0c-2bea-4d3d-962c-593bc7b4a23d\" name=\"Changes\" comment=\"\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2IlhNMjJLRi9wnp6MGb3YQ2L4JH\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Users/Arseny/PycharmProjects/casino\"\r\n  }\r\n}]]></component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"4808de0c-2bea-4d3d-962c-593bc7b4a23d\" name=\"Changes\" comment=\"\" />\r\n      <created>1670762037040</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1670762037040</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -1,7 +1,11 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="4808de0c-2bea-4d3d-962c-593bc7b4a23d" name="Changes" comment="" />
++    <list default="true" id="4808de0c-2bea-4d3d-962c-593bc7b4a23d" name="Changes" comment="">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/combine.py" beforeDir="false" afterPath="$PROJECT_DIR$/combine.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/hold'em.py" beforeDir="false" afterPath="$PROJECT_DIR$/hold'em.py" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -22,9 +26,37 @@
+   "keyToString": {
+     "RunOnceActivity.OpenProjectViewOnStart": "true",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "last_opened_file_path": "C:/Users/Arseny/PycharmProjects/casino"
++    "last_opened_file_path": "C:/Users/Arseny/PycharmProjects/pythonProject"
+   }
+ }]]></component>
++  <component name="RunManager">
++    <configuration name="combine" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
++      <module name="casino" />
++      <option name="INTERPRETER_OPTIONS" value="" />
++      <option name="PARENT_ENVS" value="true" />
++      <envs>
++        <env name="PYTHONUNBUFFERED" value="1" />
++      </envs>
++      <option name="SDK_HOME" value="" />
++      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
++      <option name="IS_MODULE_SDK" value="true" />
++      <option name="ADD_CONTENT_ROOTS" value="true" />
++      <option name="ADD_SOURCE_ROOTS" value="true" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/combine.py" />
++      <option name="PARAMETERS" value="" />
++      <option name="SHOW_COMMAND_LINE" value="false" />
++      <option name="EMULATE_TERMINAL" value="false" />
++      <option name="MODULE_MODE" value="false" />
++      <option name="REDIRECT_INPUT" value="false" />
++      <option name="INPUT_FILE" value="" />
++      <method v="2" />
++    </configuration>
++    <recent_temporary>
++      <list>
++        <item itemvalue="Python.combine" />
++      </list>
++    </recent_temporary>
++  </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+@@ -36,4 +68,15 @@
+     </task>
+     <servers />
+   </component>
++  <component name="Vcs.Log.Tabs.Properties">
++    <option name="TAB_STATES">
++      <map>
++        <entry key="MAIN">
++          <value>
++            <State />
++          </value>
++        </entry>
++      </map>
++    </option>
++  </component>
+ </project>
+\ No newline at end of file
+Index: hold'em.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import random\r\nimport main as mn\r\n\r\nclass Deck:\r\n    def __init__(self):\r\n        self.players = input()\r\n        self.cards = []\r\n        self.table = []\r\n        self.bank = 0\r\n        ranks = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}\r\n        suits = {'Hearts', 'Diamonds', 'Spades', 'Clubs'}\r\n        for card in ranks:\r\n            for suit in suits:\r\n                self.cards.append((card, suit))\r\n\r\n    def shuffle(self):\r\n        random.shuffle(self.cards)\r\n        pass\r\n\r\n    def tabledeck(self):\r\n        ur_cards = self.cards[0], self.cards[0]\r\n        self.cards.remove(self.cards[0])\r\n        self.cards.remove(self.cards[0])\r\n        print(ur_cards)\r\n        k = 3\r\n        while k <= 5:\r\n            bet = input()\r\n            if bet == 'check':\r\n                print(self.bank)\r\n                pass\r\n            elif bet == 'bet':\r\n                last = int(input())\r\n                self.bank += last\r\n            elif bet == 'raise':\r\n                last = last * int(input())\r\n                self.bank += last\r\n                print(self.bank)\r\n            elif bet == 'call':\r\n                self.bank += last\r\n                print(self.bank)\r\n            elif bet == 'fold':\r\n                break\r\n            if k == 3:\r\n                self.table.append(self.cards[0])\r\n                self.table.append(self.cards[1])\r\n                self.table.append(self.cards[2])\r\n                self.cards.remove(self.cards[0])\r\n                self.cards.remove(self.cards[0])\r\n                self.cards.remove(self.cards[0])\r\n                print(self.table)\r\n                k += 1\r\n            else:\r\n                self.table.append(self.cards[0])\r\n                self.cards.remove(self.cards[0])\r\n                print(self.table)\r\n                k += 1\r\n\r\n\r\ndef main():\r\n    d = Deck()\r\n    d.shuffle()\r\n    d.tabledeck()\r\n    mn.Combo(d)\r\n    pass\r\n\r\n\r\nif __name__ == '__main__':\r\n    main()\r\n
+===================================================================
+diff --git a/hold'em.py b/hold'em.py
+--- a/hold'em.py	
++++ b/hold'em.py	
+@@ -1,5 +1,4 @@
+ import random
+-import main as mn
+ 
+ class Deck:
+     def __init__(self):
+@@ -60,7 +59,6 @@
+     d = Deck()
+     d.shuffle()
+     d.tabledeck()
+-    mn.Combo(d)
+     pass
+ 
+ 
+Index: combine.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import copy\r\n\r\n\r\nclass Combo:\r\n    \"\"\"docstring for Combo\"\"\"\r\n\r\n    def test_cards(self):\r\n        normal_pool = sorted(self.pool, key=lambda card: card.val, reverse=True)\r\n\r\n        pool_vals = [card.val for card in normal_pool]\r\n        pool_suis = [card.sui for card in normal_pool]\r\n\r\n        if 14 in pool_vals:\r\n            ace_pool = copy.deepcopy(self.pool)\r\n            for card in ace_pool:\r\n                if card.val == 14:\r\n                    card.val = 1\r\n            ace_pool = sorted(ace_pool, key=lambda card: card.val, reverse=True)\r\n\r\n        result = {}\r\n\r\n        def put_result():\r\n            self.cards = result['cards']\r\n\r\n            cards_names = ' '.join([card.name for card in result['cards']])\r\n            self.text = result['text'] + cards_names\r\n\r\n            pre_power = ''.join([str(hex(card.val))[2:] for card in self.cards])\r\n\r\n            if len(pre_power) == 2:\r\n                pre_power += '000'\r\n\r\n            power_0x = str(result['combo_index']) + pre_power\r\n\r\n            self.power = int(power_0x, 16)\r\n\r\n        def high_card():\r\n            if self.power > 0:\r\n                return None\r\n            result['cards'] = normal_pool[:5]\r\n            result['text'] = 'Старшая карта '\r\n            result['combo_index'] = 0\r\n\r\n            put_result()\r\n\r\n        def one_pair():\r\n            if self.power > 1:\r\n                return None\r\n            res = [card for card in normal_pool if pool_vals.count(card.val) == 2]\r\n\r\n            if len(res) == 2:\r\n                cards = [card for card in normal_pool if card.val != res[0].val]\r\n\r\n                result['cards'] = res + cards[:3]\r\n                result['text'] = 'Одна пара '\r\n                result['combo_index'] = 1\r\n\r\n                put_result()\r\n\r\n        def two_pairs():\r\n            if self.power > 2 or len(normal_pool) < 5:\r\n                return None\r\n            res = [card for card in normal_pool if pool_vals.count(card.val) == 2][:4]\r\n\r\n            if len(res) == 4:\r\n                cards = [card for card in normal_pool if card.val != res[0].val and card.val != res[2].val]\r\n\r\n                result['cards'] = res + [cards[0]]\r\n                result['text'] = 'Две пары '\r\n                result['combo_index'] = 2\r\n\r\n                put_result()\r\n\r\n        def three():\r\n            if self.power > 3 or len(normal_pool) < 5:\r\n                return None\r\n            res = [card for card in normal_pool if pool_vals.count(card.val) == 3]\r\n\r\n            if len(res) == 3:\r\n                cards = [card for card in normal_pool if card.val != res[0].val]\r\n\r\n                result['cards'] = res + cards[:2]\r\n                result['text'] = 'Тройка '\r\n                result['combo_index'] = 3\r\n\r\n                put_result()\r\n\r\n        def straight():\r\n            if self.power > 4 or len(normal_pool) < 5:\r\n                return None\r\n\r\n            def check_str(cards):\r\n                straight_test = True\r\n                x = 0\r\n                while x < 4:\r\n                    straight_test = straight_test and cards[x].val - 1 == cards[x + 1].val\r\n                    x += 1\r\n                return {'straight_test': straight_test, 'cards': cards}\r\n\r\n            res_list = []\r\n\r\n            if 14 in pool_vals:\r\n                x = 0\r\n                while True:\r\n                    pre_res = check_str(ace_pool[-5 - x:][:5])\r\n                    res_list.append(pre_res)\r\n                    x += 1\r\n                    if x == len(ace_pool) - 4:\r\n                        break\r\n\r\n            x = 0\r\n            while True:\r\n                pre_res = check_str(normal_pool[-5 - x:][:5])\r\n                res_list.append(pre_res)\r\n                x += 1\r\n                if x == len(normal_pool) - 4:\r\n                    break\r\n\r\n            for res in res_list:\r\n                if res['straight_test']:\r\n                    result['cards'] = res['cards']\r\n                    result['text'] = 'Стрит '\r\n                    result['combo_index'] = 4\r\n\r\n                    put_result()\r\n\r\n        def flush():\r\n            if self.power > 5 or len(normal_pool) < 5:\r\n                return None\r\n            res = [card for card in normal_pool if pool_suis.count(card.sui) > 4]\r\n\r\n            if res:\r\n                result['cards'] = res\r\n                result['text'] = 'Флеш '\r\n                result['combo_index'] = 5\r\n\r\n                put_result()\r\n\r\n        def full_house():\r\n            if self.power > 6 or len(normal_pool) < 5:\r\n                return None\r\n            three_res = [card for card in normal_pool if pool_vals.count(card.val) > 2]\r\n            if three_res:\r\n                two_res = [card for card in normal_pool if\r\n                           pool_vals.count(card.val) > 1 and card.val != three_res[0].val]\r\n                if two_res:\r\n                    result['cards'] = three_res[:3] + two_res[:2]\r\n                    result['text'] = 'Фул-хаус '\r\n                    result['combo_index'] = 6\r\n\r\n                    put_result()\r\n\r\n        def four():\r\n            if self.power > 7 or len(normal_pool) < 5:\r\n                return None\r\n\r\n            res = [card for card in normal_pool if pool_vals.count(card.val) == 4]\r\n\r\n            if res:\r\n                cards = [card for card in normal_pool if card.val != res[0].val]\r\n\r\n                result['cards'] = res + [cards[0]]\r\n                result['text'] = 'Каре '\r\n                result['combo_index'] = 7\r\n\r\n                put_result()\r\n\r\n        def straight_flush():\r\n            if len(normal_pool) < 5:\r\n                return None\r\n\r\n            def check_sf(cards):\r\n                straight_test = True\r\n                flush_test = True\r\n                x = 0\r\n                while x < 4:\r\n                    straight_test = straight_test and cards[x].val - 1 == cards[x + 1].val\r\n                    flush_test = flush_test and cards[x].sui == cards[x + 1].sui\r\n                    x += 1\r\n                return {'straight_test': straight_test, 'flush_test': flush_test, 'cards': cards}\r\n\r\n            res_list = []\r\n\r\n            if 14 in pool_vals:\r\n                x = 0\r\n                while True:\r\n                    pre_res = check_sf(ace_pool[-5 - x:][:5])\r\n                    res_list.append(pre_res)\r\n                    x += 1\r\n                    if x == len(ace_pool) - 4:\r\n                        break\r\n\r\n            x = 0\r\n            while True:\r\n                pre_res = check_sf(normal_pool[-5 - x:][:5])\r\n                res_list.append(pre_res)\r\n                x += 1\r\n                if x == len(normal_pool) - 4:\r\n                    break\r\n\r\n            for res in res_list:\r\n                if res['straight_test'] and res['flush_test']:\r\n                    result['cards'] = res['cards']\r\n                    result['text'] = 'Стрит-флэш '\r\n                    result['combo_index'] = 8\r\n\r\n                    put_result()\r\n\r\n        print(straight_flush())\r\n        print(high_card())\r\n\r\n    def __init__(self, pool):\r\n        self.pool = pool\r\n        self.power = 0\r\n        self.text = ''\r\n        self.cards = []\r\n        self.test_cards()\r\n\r\n
+===================================================================
+diff --git a/combine.py b/combine.py
+--- a/combine.py	
++++ b/combine.py	
+@@ -1,7 +1,72 @@
+ import copy
++from random import shuffle
++
++class Deck:
++    def __init__(self):
++        self.players = input()
++        self.cards = []
++        self.table = []
++        self.bank = 0
++        ranks = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}
++        suits = {'Hearts', 'Diamonds', 'Spades', 'Clubs'}
++        for card in ranks:
++            for suit in suits:
++                self.cards.append((card, suit))
++
++    def cardshuffle(self):
++        shuffle(self.cards)
++        pass
++
++    def tabledeck(self):
++        ur_cards = self.cards[0], self.cards[0]
++        self.cards.remove(self.cards[0])
++        self.cards.remove(self.cards[0])
++        print(ur_cards)
++        k = 3
++        while k <= 5:
++            bet = input()
++            if bet == 'check':
++                print(self.bank)
++                pass
++            elif bet == 'bet':
++                last = int(input())
++                self.bank += last
++            elif bet == 'raise':
++                last = last * int(input())
++                self.bank += last
++                print(self.bank)
++            elif bet == 'call':
++                self.bank += last
++                print(self.bank)
++            elif bet == 'fold':
++                break
++            if k == 3:
++                self.table.append(self.cards[0])
++                self.table.append(self.cards[1])
++                self.table.append(self.cards[2])
++                self.cards.remove(self.cards[0])
++                self.cards.remove(self.cards[0])
++                self.cards.remove(self.cards[0])
++                print(self.table)
++                k += 1
++            else:
++                self.table.append(self.cards[0])
++                self.cards.remove(self.cards[0])
++                print(self.table)
++                k += 1
++
+ 
++def main():
++    d = Deck()
++    d.cardshuffle()
++    d.tabledeck()
++    pass
+ 
+-class Combo:
++
++if __name__ == '__main__':
++    main()
++
++class Combo():
+     """docstring for Combo"""
+ 
+     def test_cards(self):
+@@ -210,6 +275,7 @@
+         print(high_card())
+ 
+     def __init__(self, pool):
++        super(Combo, self).__init__()
+         self.pool = pool
+         self.power = 0
+         self.text = ''
