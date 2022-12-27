@@ -1,107 +1,53 @@
-from random import shuffle
+import random
+from const import *
 
 
-class blackjack:
+class Deck:
     def __init__(self):
         self.cards = []
-        self.table = []
-        self.bank = 0
-        self.player_cards = []
-        self.pl_sum = 0
-        self.dl_sum = 0
-        self.dealer_cards = ''
-        self.fl = True
-        ranks = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11]
-        suits = {'Hearts', 'Diamonds', 'Spades', 'Clubs'}
-        for card in ranks:
-            for suit in suits:
-                self.cards.append((card, suit))
+        self.build()
 
-    def cardshuffle(self):
-        shuffle(self.cards)
+    def build(self):
+        for value in RANKS:
+            for suit in SUITS:
+                self.cards.append((value, suit))
 
-    def tabledeck(self):
-        self.player_cards = [self.cards[0], self.cards[1]]
-        self.cards.remove(self.cards[0])
-        self.cards.remove(self.cards[0])
-        print(self.player_cards)
-        self.dealer_cards = self.cards[0], self.cards[1]
-        self.cards.remove(self.cards[0])
-        self.cards.remove(self.cards[0])
-        print('dealer: X,', self.dealer_cards[1])
-        self.dl_sum = self.dealer_cards[0][0] + self.dealer_cards[1][0]
-        self.pl_sum = self.player_cards[0][0] + self.player_cards[1][0]
+    def shuffle(self):
+        random.shuffle(self.cards)
 
-    def game(self):
-        jk = jack_combo(self.cards, self.pl_sum, self.dl_sum, self.player_cards, self.dealer_cards)
-        while self.fl:
-            self.fl = jk.double()
-            move = input()
-            if move == 'stand':
-                self.fl = jk.stand()
-            elif move == 'hit':
-                self.fl = jk.hit()
+    def deal(self):
+        if len(self.cards) > 1:
+            return self.cards.pop()
 
 
-class jack_combo():
-    def __init__(self, cards, plsum, dlsum, plcard, dlcard):
-        self.cards = cards
-        self.pl_sum = plsum
-        self.dl_sum = dlsum
-        self.player_cards = plcard
-        self.dealer_cards = dlcard
+class Hand(Deck):
+    def __init__(self):
+        self.cards = []
+        self.card_img = []
+        self.value = 0
 
-    def double(self):
-        if self.player_cards[0][0] == self.player_cards[1][0]:
-            print('double?')
-            ans = input()
-            if ans == 'yes':
-                self.player_cards.append(self.cards[0])
-                self.pl_sum += self.cards[0][0]
-                self.cards.remove(self.cards[0])
-                print(self.player_cards)
-                print('dealer:', self.dealer_cards)
-                if self.pl_sum > 21:
-                    print('perebor, dealer wins')
-                    return False
-                elif self.dl_sum > self.pl_sum:
-                    print('dealer wins')
-                    return False
-                elif self.pl_sum > self.dl_sum:
-                    print('you win')
-                    return False
-                else:
-                    print('draw')
-                    return False
+    def add_card(self, card):
+        self.cards.append(card)
+
+    def calc_hand(self):
+        first_card_index = [a_card[0] for a_card in self.cards]
+        non_aces = [c for c in first_card_index if c != 'A']
+        aces = [c for c in first_card_index if c == 'A']
+
+        for card in non_aces:
+            if card in 'JQK':
+                self.value += 10
             else:
-                return True
+                self.value += int(card)
 
-    def hit(self):
-        self.player_cards.append(self.cards[0])
-        self.pl_sum += self.cards[0][0]
-        self.cards.remove(self.cards[0])
-        print(self.player_cards)
-        if self.pl_sum > 21:
-            print('perebor, dealer wins')
-            return False
-        else:
-            return True
+        for card in aces:
+            if self.value <= 10:
+                self.value += 11
+            else:
+                self.value += 1
 
-    def stand(self):
-        print(self.dealer_cards)
-        print(self.player_cards)
-        if self.dl_sum > self.pl_sum:
-            print('dealer wins')
-            return False
-        elif self.pl_sum > self.dl_sum:
-            print('you win')
-            return False
-        else:
-            print('draw')
-            return False
-
-
-b = blackjack()
-b.cardshuffle()
-b.tabledeck()
-b.game()
+    def display_cards(self):
+        for card in self.cards:
+            cards = "".join((card[0], card[1]))
+            if cards not in self.card_img:
+                self.card_img.append(cards)
