@@ -19,18 +19,19 @@ class Button:
         self.active = False
         self.done = False
         self.profile = ()
+        self.socket = None
 
     def handle_event(self, event):
         if event.type == pg.MOUSEBUTTONDOWN:
             if self.rect.collidepoint(event.pos):
                 if all(list(map(lambda x: 1 if len(x.text) > 0 and x.text != 'login' and x.text != 'password' and x.text != 'server ip' else 0, self.boxes))):
-                    socket = casinosocket.socketprocessor(self.boxes[2].text)
+                    self.socket = casinosocket.socketprocessor(self.boxes[2].text)
                     if self.type == 'reg':
-                        socket.registration(self.boxes[0], self.boxes[1])
-                        self.profile = (socket.getid(self.boxes[0].text, self.boxes[1].text).decode('utf-8'), socket.getprofile(socket.getid(self.boxes[0].text, self.boxes[1].text).decode('utf-8')))
+                        self.socket.registration(self.boxes[0], self.boxes[1])
+                        self.profile = (self.socket.getid(self.boxes[0].text, self.boxes[1].text).decode('utf-8'), self.socket.getprofile(self.socket.getid(self.boxes[0].text, self.boxes[1].text).decode('utf-8')))
                         self.done = True
                     elif self.type == 'log in':
-                        self.profile = (socket.getid(self.boxes[0].text, self.boxes[1].text).decode('utf-8'), socket.getprofile(socket.getid(self.boxes[0].text, self.boxes[1].text).decode('utf-8')))
+                        self.profile = (self.socket.getid(self.boxes[0].text, self.boxes[1].text).decode('utf-8'), self.socket.getprofile(self.socket.getid(self.boxes[0].text, self.boxes[1].text).decode('utf-8')))
                         print(self.profile)
                         self.done = True
 
@@ -101,7 +102,7 @@ class entrance:
                     btn.handle_event(event)
                     if btn.done:
                         pg.quit()
-                        window = mainwindow(btn.profile[0], btn.profile[1].decode('utf-8').split('|')[1], btn.profile[1].decode('utf-8').split('|')[2], btn.profile[1].decode('utf-8').split('|')[1])
+                        window = mainwindow(btn.profile[0], btn.profile[1].decode('utf-8').split('|')[1], btn.profile[1].decode('utf-8').split('|')[2], btn.profile[1].decode('utf-8').split('|')[1], btn.socket)
                         window.render()
                         done = True
 

@@ -1,6 +1,7 @@
 import pygame
-import casinosocket
+from casinosocket import socketprocessor
 from main import Game
+from front_jack import Window
 
 class Board:
     def __init__(self, width, height, screen):
@@ -70,11 +71,16 @@ class Board:
             slotwindow = Game()
             slotwindow.run()
             self.hide = True
+        elif coords == (1, 0):
+            bjack = Window()
+            bjack.render()
+            self.hide = True
 
 
 
 class mainwindow:
-    def __init__(self, id, username, password, chips):
+    def __init__(self, id, username, password, chips, socket):
+        self.socket = socket
         self.id = id
         self.username = username
         self.password = password
@@ -126,4 +132,5 @@ class mainwindow:
             board.hide = False
             self.render()
         else:
+            self.socket.ext()
             pygame.quit()
