@@ -22,23 +22,25 @@ class Board:
         wcolor = pygame.Color("white")
         for i in range(self.height):
             for j in range(self.width):
+                gameicon = None
                 if i == 0 and j == 0:
                     gameicon = pygame.image.load('slotsicon.jpg').convert()
+                if gameicon != None:
                     gameicon.set_colorkey((255, 255, 255))
                     obj_rect = gameicon.get_rect(
-                        center=(self.left + self.cell_size * j + self.cell_size // 2, self.top + self.cell_size * i + self.cell_size // 2))
+                        center=(self.left + self.cell_size * j + self.cell_size // 2,
+                                self.top + self.cell_size * i + self.cell_size // 2))
                     pygame.display.update()
                     scale = pygame.transform.scale(
                         gameicon, (self.cell_size, self.cell_size))
 
                     scale_rect = scale.get_rect(
-                        center=(self.left + self.cell_size * j + self.cell_size // 2, self.top + self.cell_size * i + self.cell_size // 2))
+                        center=(self.left + self.cell_size * j + self.cell_size // 2,
+                                self.top + self.cell_size * i + self.cell_size // 2))
 
                     self.screen.blit(scale, scale_rect)
-                else:
-                    pygame.draw.rect(surface, wcolor,
-                                 (self.left + self.cell_size * j, self.top + self.cell_size * i,
-                                  self.cell_size, self.cell_size), 1 if self.board[i][j] == 0 else 0)
+
+
 
     def get_click(self, mouse_pos):
         cell_coords = self.get_cell(mouse_pos)
@@ -89,6 +91,8 @@ class mainwindow:
         board = Board(8, 3, screen)
         board.set_view(0, 0, 100)
         running = True
+        bgimage = pygame.image.load('mainbackground.png').convert()
+        itt = 0
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -96,25 +100,24 @@ class mainwindow:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     board.on_click(event.pos)
                     if board.hide:
-                        pygame.display.quit()
                         running = False
                         break
+                if itt == 0:
+                    itt += 1
+                    sprite = bgimage
+                    sprite.set_colorkey((255, 255, 255))
+                    obj_rect = sprite.get_rect()
+                    pygame.display.update()
+                    scale = pygame.transform.scale(
+                        sprite, (sprite.get_width(),
+                                 sprite.get_height()))
 
-                bgimage = pygame.image.load('mainbackground.png').convert()
-                sprite = bgimage
-                sprite.set_colorkey((255, 255, 255))
-                obj_rect = sprite.get_rect()
-                pygame.display.update()
-                scale = pygame.transform.scale(
-                    sprite, (sprite.get_width(),
-                             sprite.get_height()))
+                    scale_rect = scale.get_rect()
 
-                scale_rect = scale.get_rect()
+                    screen.blit(scale, scale_rect)
 
-                screen.blit(scale, scale_rect)
-
-                pygame.display.update(obj_rect)
-                board.render(screen)
+                    pygame.display.update(obj_rect)
+                    board.render(screen)
 
 
 

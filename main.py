@@ -16,18 +16,20 @@ class Game:
     def run(self):
 
         self.start_time = pygame.time.get_ticks()
-
-        while True:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-
+        run = True
+        while run:
             self.delta_time = (pygame.time.get_ticks() - self.start_time) / 1000
             self.start_time = pygame.time.get_ticks()
             pygame.display.update()
             self.screen.blit(self.bg_image, (0, 0))
             self.m.update(self.delta_time)
             self.clock.tick(FPS)
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    run = False
+                    break
+
+
 
 
 if __name__ == '__main__':
