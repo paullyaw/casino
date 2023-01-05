@@ -3,7 +3,7 @@ import pygame as pygame
 display_width = 900
 display_height = 700
 
-background_color = (34,139,34)
+background_color = ("pink")
 grey = (220,220,220)
 black = (0,0,0)
 green = (0, 200, 0)
