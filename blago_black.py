@@ -30,9 +30,9 @@ class Hand(Deck):
         self.cards.append(card)
 
     def calc_hand(self):
-        first_card_index = [a_card[0] for a_card in self.cards]
-        non_aces = [c for c in first_card_index if c != 'A']
-        aces = [c for c in first_card_index if c == 'A']
+        first_card_index = [val_card[0] for val_card in self.cards]
+        non_aces = [val_card for val_card in first_card_index if val_card != 'A']
+        aces = [val_card for val_card in first_card_index if val_card == 'A']
 
         for card in non_aces:
             if card in 'JQK':

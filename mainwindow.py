@@ -1,8 +1,9 @@
 import pygame
 from casinosocket import socketprocessor
 from main import Game
-from front_jack import Window
-from changecatalog import changecatalog
+import front_jack
+import changecatalog
+from field import fieldwindow
 
 COLOR_INACTIVE = (255, 255, 255)
 COLOR_ACTIVE = (50, 50, 250)
@@ -77,8 +78,9 @@ class Button:
 
 
 class Board:
-    def __init__(self, width, height, screen, id, socket):
+    def __init__(self, width, height, screen, id, chips, socket):
         self.width = width
+        self.chips = chips
         self.height = height
         self.board = [[0] * width for _ in range(height)]
         self.left = 10
@@ -102,11 +104,13 @@ class Board:
                 if i == 0 and j == 0:
                     gameicon = pygame.image.load('slotsicon.jpg').convert()
                 if i == 0 and j == 1:
-                    gameicon = pygame.image.load('slotsicon.jpg').convert()
+                    gameicon = pygame.image.load('poker.png').convert()
                 if i == 4 and j == 0:
                     gameicon = pygame.image.load('changelogin.png').convert()
                 if i == 4 and j == 1:
                     gameicon = pygame.image.load('changepassword.png').convert()
+                if i == 0 and j == 2:
+                    gameicon = pygame.image.load('cash.jpg').convert()
                 if gameicon != None:
                     gameicon.set_colorkey((255, 255, 255))
                     obj_rect = gameicon.get_rect(
@@ -153,14 +157,18 @@ class Board:
             slotwindow.run()
             self.hide = True
         elif coords == (1, 0):
-            bjack = Window()
+            bjack = front_jack.Play()
             bjack.render()
             self.hide = True
+        elif coords == (2, 0):
+            field = fieldwindow(self.id, 1, self.chips, self.socket)
+            field.render()
+            self.hide = True
         elif coords == (0, 4):
-            catalog = changecatalog('login', self.id, self.socket)
+            catalog = changecatalog.changecatalog('login', self.id, self.socket)
             catalog.render()
         elif coords == (1, 4):
-            catalog = changecatalog('password', self.id, self.socket)
+            catalog = changecatalog.changecatalog('password', self.id, self.socket)
             catalog.render()
 
 
@@ -178,14 +186,14 @@ class mainwindow:
         pygame.init()
         #1800 800 if desktop
         #800 400 if laptop
-        size = 800, 400
+        size = 1800, 800
         screen = pygame.display.set_mode(size)
         pygame.display.set_caption("Queen of spades")
         logo = pygame.image.load('logopic.jpg').convert()
         pygame.display.set_icon(logo)
-        board = Board(8, 5, screen, self.id, self.socket)
+        board = Board(8, 5, screen, self.id, self.chips, self.socket)
         # 0, 0, 100 if desktop 0, 0, 20 if laptop
-        board.set_view(0, 0, 20)
+        board.set_view(0, 0, 100)
         running = True
         bgimage = pygame.image.load('mainbackground.png').convert()
         itt = 0

@@ -126,3 +126,4 @@ class changecatalog:
                     btn.draw(self.screen)
 
                 pg.display.flip()
+        pg.quit()
