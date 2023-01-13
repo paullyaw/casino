@@ -84,46 +84,47 @@ class changecatalog:
     def __init__(self, table, id, socket):
         pg.init()
 
-        self.screen = pg.display.set_mode((384, 135))
+        self.screen = pg.display
+        self.screen.set_mode(((384, 135)))
         self.socket = socket
         self.id = id
         self.table = table
+        if self.table == 'login':
+            self.screen.set_caption("Смена логина")
+            self.input_box1 = InputBox(10, 10, 14, 32, 'login')
+        else:
+            self.screen.set_caption('Смена пароля')
+            self.input_box1 = InputBox(10, 10, 14, 32, 'password')
 
     def render(self):
-        if self.table == 'login':
-            pg.display.set_caption("Смена логина")
-            input_box1 = InputBox(10, 10, 14, 32, 'login')
-        else:
-            pg.display.set_caption('Смена пароля')
-            input_box1 = InputBox(10, 10, 14, 32, 'password')
+
 
         logo = pg.image.load('logopic.jpg').convert()
-        pg.display.set_icon(logo)
-        input_boxes = [input_box1]
-        buttons = [Button(220, 10, 56, 56, self.table, input_box1, self.socket)]
-        done = False
+        input_boxes = [self.input_box1]
+        buttons = [Button(220, 10, 56, 56, self.table, self.input_box1, self.socket)]
+        self.run = True
 
-        while not done:
+        while self.run:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
-                    done = True
+                    self.run = True
                     break
                 for box in input_boxes:
                     box.handle_event(event)
                 for btn in buttons:
                     btn.handle_event(event)
                     if btn.done:
-                        done = True
+                        self.run = True
 
-            if not done:
+            if self.run:
                 for box in input_boxes:
                     box.update()
 
-                self.screen.fill((10, 10, 30))
+                self.screen.set_mode((384, 135)).fill((10, 10, 30))
                 for box in input_boxes:
-                    box.draw(self.screen)
+                    box.draw(self.screen.set_mode((384, 135)))
                 for btn in buttons:
-                    btn.draw(self.screen)
+                    btn.draw(self.screen.set_mode((384, 135)))
 
-                pg.display.flip()
+                self.screen.flip()
         pg.quit()

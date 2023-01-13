@@ -90,6 +90,7 @@ class Board:
         self.hide = False
         self.id = id
         self.socket = socket
+        self.runninggame = None
 
     def set_view(self, left, top, cell_size):
         self.left = left
@@ -153,23 +154,19 @@ class Board:
                                                                            self.cell_size < \
                                                                      self.height else None)
         if coords == (0, 0):
-            slotwindow = Game()
-            slotwindow.run()
+            self.runninggame = Game()
             self.hide = True
         elif coords == (1, 0):
-            bjack = front_jack.Play()
-            bjack.render()
+            self.runninggame = front_jack.Play()
             self.hide = True
         elif coords == (2, 0):
-            field = fieldwindow(self.id, 1, self.chips, self.socket)
-            field.render()
+            self.runninggame = fieldwindow(self.id, 1, self.chips, self.socket)
             self.hide = True
         elif coords == (0, 4):
-            catalog = changecatalog.changecatalog('login', self.id, self.socket)
-            catalog.render()
+            self.runninggame = changecatalog.changecatalog('login', self.id, self.socket)
         elif coords == (1, 4):
-            catalog = changecatalog.changecatalog('password', self.id, self.socket)
-            catalog.render()
+            self.runninggame = changecatalog.changecatalog('password', self.id, self.socket)
+            self.hide = True
 
 
 
@@ -206,7 +203,6 @@ class mainwindow:
                     board.on_click(event.pos)
                     if board.hide:
                         running = False
-                        pygame.quit()
                         break
                 if itt == 0:
                     itt += 1
@@ -228,9 +224,15 @@ class mainwindow:
 
 
                 pygame.display.flip()
-        if running == False and board.hide == True:
+        if not running and board.hide:
             board.hide = False
+            print(3)
+            board.runninggame.render()
+            while board.runninggame.run:
+                pass
+            print(2)
             self.render()
+            print(1)
         else:
             self.socket.ext()
             pygame.quit()

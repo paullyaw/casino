@@ -5,7 +5,6 @@ import pygame
 
 class Game:
     def __init__(self):
-        pygame.init()
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption('Слоты')
         self.bg_image = pygame.image.load(bg_image).convert_alpha()
@@ -13,11 +12,11 @@ class Game:
         self.clock = pygame.time.Clock()
         self.delta_time = 0
 
-    def run(self):
-
+    def render(self):
+        pygame.init()
         self.start_time = pygame.time.get_ticks()
-        run = True
-        while run:
+        self.run = True
+        while self.run:
             self.delta_time = (pygame.time.get_ticks() - self.start_time) / 1000
             self.start_time = pygame.time.get_ticks()
             pygame.display.update()
@@ -26,7 +25,7 @@ class Game:
             self.clock.tick(FPS)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    run = False
+                    self.run = False
                     break
 
 
@@ -34,4 +33,4 @@ class Game:
 
 if __name__ == '__main__':
     game = Game()
-    game.run()
+    game.render()
