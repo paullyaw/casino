@@ -7,8 +7,6 @@ from field import fieldwindow
 
 COLOR_INACTIVE = (255, 255, 255)
 COLOR_ACTIVE = (50, 50, 250)
-FONT = pygame.font.Font(None, 32)
-BTNFONT = pygame.font.Font(None, 24)
 
 
 class InputBox:
@@ -16,7 +14,8 @@ class InputBox:
         self.rect = pygame.Rect(x, y, w, h)
         self.color = COLOR_INACTIVE
         self.text = text
-        self.txt_surface = FONT.render(text, True, self.color)
+        print(111111111111111)
+        self.txt_surface = pygame.font.Font(None, 32).render(text, True, self.color)
         self.active = False
 
     def handle_event(self, event):
@@ -49,32 +48,7 @@ class InputBox:
         # Blit the rect.
         pygame.draw.rect(screen, self.color, self.rect, 2)
 
-class Button:
-    def __init__(self, x, y, w, h, type, boxes, event, socket):
-        self.rect = pygame.Rect(x, y, w, h)
-        self.color = (255, 255, 255)
-        self.boxes = boxes
-        self.type = type
-        self.txt_surface = BTNFONT.render(type, True, COLOR_ACTIVE)
-        self.active = False
-        self.done = False
-        self.profile = ()
-        self.socket = socket
-        self.event = event
 
-    def handle_event(self, event):
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if self.rect.collidepoint(event.pos):
-                    if self.type == 'change login':
-                        self.socket.setlogin(self.boxes[0])
-                        self.done = True
-
-
-    def draw(self, screen):
-        # Blit the rect.
-        pygame.draw.rect(screen, self.color, self.rect)
-        # Blit the text.
-        screen.blit(self.txt_surface, (self.rect.x + 5, self.rect.y + 5))
 
 
 class Board:
@@ -184,6 +158,7 @@ class mainwindow:
         #1800 800 if desktop
         #800 400 if laptop
         size = 1800, 800
+        clock = pygame.time.Clock()
         screen = pygame.display.set_mode(size)
         pygame.display.set_caption("Queen of spades")
         logo = pygame.image.load('logopic.jpg').convert()
@@ -194,6 +169,7 @@ class mainwindow:
         running = True
         bgimage = pygame.image.load('mainbackground.png').convert()
         itt = 0
+        input_box = InputBox(700, 0, 14, 32, 'chips count')
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -204,26 +180,32 @@ class mainwindow:
                     if board.hide:
                         running = False
                         break
-                if itt == 0:
-                    itt += 1
-                    sprite = bgimage
-                    sprite.set_colorkey((255, 255, 255))
-                    obj_rect = sprite.get_rect()
-                    pygame.display.update()
-                    scale = pygame.transform.scale(
-                        sprite, (sprite.get_width(),
-                                 sprite.get_height()))
+            sprite = bgimage
+            sprite.set_colorkey((255, 255, 255))
+            obj_rect = sprite.get_rect()
+            pygame.display.update()
+            scale = pygame.transform.scale(
+                sprite, (sprite.get_width(),
+                         sprite.get_height()))
 
-                    scale_rect = scale.get_rect()
+            scale_rect = scale.get_rect()
 
-                    screen.blit(scale, scale_rect)
+            screen.blit(scale, scale_rect)
 
-                    pygame.display.update(obj_rect)
-                    board.render(screen)
+            pygame.display.update(obj_rect)
+            print(2)
+            board.render(screen)
+            print(1)
+            input_box.update()
+
+            input_box.draw(screen)
 
 
 
-                    pygame.display.flip()
+            pygame.display.flip()
+            clock.tick(30)
+
+
         if not running and board.hide:
             pygame.display.quit()
             board.runninggame.render()

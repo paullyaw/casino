@@ -6,9 +6,7 @@ import time
 
 
 
-
 ###text object render
-
 
 class Play:
     def __init__(self):
@@ -47,8 +45,7 @@ class Play:
         self.dealer.value = 0
 
     def text_objects(self, text, font):
-        print(font, text, black)
-        textSurface = font.render(text, True, black)
+        textSurface = pygame.font.SysFont("Arial", 20).render(text, True, black)
         print('r_t_o')
         return textSurface, textSurface.get_rect()
 
@@ -58,20 +55,20 @@ class Play:
 
     # game text display
     def game_texts(self, text, x, y):
-        TextSurf, TextRect = self.text_objects(text, textfont)
+        TextSurf, TextRect = self.text_objects(text, pygame.font.SysFont('Comic Sans MS', 35))
         TextRect.center = (x, y)
         self.gameDisplay.blit(TextSurf, TextRect)
 
         pygame.display.update()
 
     def game_finish(self, text, x, y, color):
-        TextSurf, TextRect = self.end_text_objects(text, game_end, color)
+        TextSurf, TextRect = self.end_text_objects(text, pygame.font.SysFont('dejavusans', 100), color)
         TextRect.center = (x, y)
         self.gameDisplay.blit(TextSurf, TextRect)
         pygame.display.update()
 
     def black_jack(self, text, x, y, color):
-        TextSurf, TextRect = self.end_text_objects(text, blackjack, color)
+        TextSurf, TextRect = self.end_text_objects(text, pygame.font.SysFont('roboto', 70), color)
         TextRect.center = (x, y)
         self.gameDisplay.blit(TextSurf, TextRect)
         pygame.display.update()
@@ -92,7 +89,7 @@ class Play:
             print('0111111111')
             pygame.draw.rect(self.gameDisplay, ic, (x, y, w, h))
         print(msg)
-        TextSurf, TextRect = self.text_objects(msg, font)
+        TextSurf, TextRect = self.text_objects(msg, pygame.font.SysFont("Arial", 20))
         TextRect.center = ((x + (w / 2)), (y + (h / 2)))
         print(131313131313)
         self.gameDisplay.blit(TextSurf, TextRect)
@@ -152,7 +149,7 @@ class Play:
             sys.exit()
 
     def stand(self):
-        show_dealer_card = pygame.image.load('img/' + self.dealer.card_img[1] + '.png').convert()
+        show_dealer_card = pygame.image.load('card/' + self.dealer.card_img[1] + '.png').convert()
         self.gameDisplay.blit(show_dealer_card, (550, 200))
         self.blackjack()
         self.dealer.calc_hand()
