@@ -111,7 +111,7 @@ class Play:
         self.game_texts("Dealer's hand:", 500, 150)
 
         self.gameDisplay.blit(dealer_card, (400, 200))
-        self.gameDisplay.blit(dealer_card_2, (550, 200))
+        self.gameDisplay.blit(dealer_card_2, (600, 100))
 
         self.game_texts("Your hand:", 500, 400)
 

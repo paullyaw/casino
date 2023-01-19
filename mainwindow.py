@@ -8,6 +8,29 @@ from field import fieldwindow
 COLOR_INACTIVE = (255, 255, 255)
 COLOR_ACTIVE = (50, 50, 250)
 
+class labelbox:
+    def __init__(self, x, y, w, h, text='Balance: ----р.'):
+        self.rect = pygame.Rect(x, y, w, h)
+        self.color = COLOR_INACTIVE
+        self.text = text
+        self.txt_surface = pygame.font.Font(None, 32).render(text, True, self.color)
+    def handle_event(self, chips):
+        if chips.isnumeric():
+            self.txt_surface = pygame.font.Font(None, 32).render('Balance: ' + str(int(chips) * 10) + 'р.', True, self.color)
+        else:
+            self.txt_surface = pygame.font.Font(None, 32).render(self.text, True, self.color)
+
+
+    def draw(self, screen):
+        # Blit the text.
+        screen.blit(self.txt_surface, (self.rect.x+5, self.rect.y+5))
+        # Blit the rect.
+        pygame.draw.rect(screen, self.color, self.rect, 2)
+
+    def update(self):
+        # Resize the box if the text is too long.
+        width = max(200, self.txt_surface.get_width()+10)
+        self.rect.w = width
 
 class InputBox:
     def __init__(self, x, y, w, h, text=''):
@@ -88,6 +111,8 @@ class Board:
                     gameicon = pygame.image.load('changepassword.png').convert()
                 if i == 0 and j == 2:
                     gameicon = pygame.image.load('cash.jpg').convert()
+                if i == 4 and j == 2:
+                    gameicon = pygame.image.load('buychips.jpg').convert()
                 if gameicon != None:
                     gameicon.set_colorkey((255, 255, 255))
                     obj_rect = gameicon.get_rect(
@@ -140,8 +165,14 @@ class Board:
             self.hide = True
         elif coords == (0, 4):
             self.runninggame = changecatalog.changecatalog('login', self.id, self.socket)
+            self.hide = True
+
         elif coords == (1, 4):
             self.runninggame = changecatalog.changecatalog('password', self.id, self.socket)
+            self.hide = True
+
+        elif coords == (2, 4):
+            self.runninggame = changecatalog.chips(self.id, self.socket)
             self.hide = True
 
 
@@ -172,6 +203,7 @@ class mainwindow:
         bgimage = pygame.image.load('mainbackground.png').convert()
         itt = 0
         input_box = InputBox(0, 700, 24, 60, 'chips count')
+        label_box = labelbox(300, 700, 24, 60, 'Balance: ')
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -183,6 +215,8 @@ class mainwindow:
                         running = False
                         break
                 input_box.handle_event(event)
+            if not running:
+                break
             sprite = bgimage
             sprite.set_colorkey((255, 255, 255))
             obj_rect = sprite.get_rect()
@@ -199,8 +233,10 @@ class mainwindow:
             print(2)
             board.render(screen)
             print(1)
+            label_box.handle_event(self.socket.getchips(self.id))
+            label_box.update()
             input_box.update()
-
+            label_box.draw(screen)
             input_box.draw(screen)
 
 

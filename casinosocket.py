@@ -27,33 +27,33 @@ class socketprocessor:
 
     def getusername(self, id):
         self.client.send(bytes(f"getusername|{id}", "utf-8"))
-        return self.client.recv(2048)
+        return self.client.recv(2048).decode('utf-8')
 
     def registration(self, login, password):
         self.client.send(bytes(f"registration|{login}|{password}", "utf-8"))
 
     def getchips(self, id):
         self.client.send(bytes(f"getchips|{id}", "utf-8"))
-        return self.client.recv(2048)
+        return self.client.recv(2048).decode('utf-8')
 
     def setchips(self, id, value):
         self.client.send(bytes(f"setchips|{id}|{value}", "utf-8"))
 
     def entertogame(self, id, game):
         self.client.send(bytes(f"entertogame|{id}|{game}", "utf-8"))
-        return self.client.recv(2048)
+        return self.client.recv(2048).decode('utf-8')
 
     def ext(self):
         self.client.close()
 
     def getprofile(self, id):
         self.client.send(bytes(f"getprofile|{id}", "utf-8"))
-        return self.client.recv(2048)
+        return self.client.recv(2048).decode('utf-8')
 
     def getid(self, login, password):
         print(login, password)
         self.client.send(bytes(f"getid|{login}|{password}", "utf-8"))
-        return self.client.recv(2048)
+        return self.client.recv(2048).decode('utf-8')
 
     def setlogin(self, id, login):
         self.client.send(bytes(f"setlogin|{id}|{login}", "utf-8"))

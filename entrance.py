@@ -28,10 +28,10 @@ class Button:
                     self.socket = casinosocket.socketprocessor(self.boxes[2].text)
                     if self.type == 'reg':
                         self.socket.registration(self.boxes[0], self.boxes[1])
-                        self.profile = (self.socket.getid(self.boxes[0].text, self.boxes[1].text).decode('utf-8'), self.socket.getprofile(self.socket.getid(self.boxes[0].text, self.boxes[1].text).decode('utf-8')))
+                        self.profile = (self.socket.getid(self.boxes[0].text, self.boxes[1].text), self.socket.getprofile(self.socket.getid(self.boxes[0].text, self.boxes[1].text)))
                         self.done = True
                     elif self.type == 'log in':
-                        self.profile = (self.socket.getid(self.boxes[0].text, self.boxes[1].text).decode('utf-8'), self.socket.getprofile(self.socket.getid(self.boxes[0].text, self.boxes[1].text).decode('utf-8')))
+                        self.profile = (self.socket.getid(self.boxes[0].text, self.boxes[1].text), self.socket.getprofile(self.socket.getid(self.boxes[0].text, self.boxes[1].text)))
                         print(self.profile)
                         self.done = True
 
@@ -106,7 +106,7 @@ class entrance:
                     btn.handle_event(event)
                     if btn.done:
                         pg.quit()
-                        window = mainwindow(btn.profile[0], btn.profile[1].decode('utf-8').split('|')[1], btn.profile[1].decode('utf-8').split('|')[2], btn.profile[1].decode('utf-8').split('|')[1], btn.socket)
+                        window = mainwindow(btn.profile[0], btn.profile[1].split('|')[1], btn.profile[1].split('|')[2], btn.profile[1].split('|')[1], btn.socket)
                         window.render()
                         done = True
 
