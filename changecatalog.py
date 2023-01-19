@@ -94,7 +94,7 @@ class Button:
                         self.socket.setpassword(self.id, self.boxes.text)
                         self.done = True
                     elif self.type == 'add chips':
-                        self.socket.setchips(self.id, self.boxes[1].text)
+                        self.socket.addchips(self.id, self.boxes[0].text)
                         self.done = True
                     elif self.type == 'calculate':
                         self.boxes[2].handle_event(self.boxes[0].text)

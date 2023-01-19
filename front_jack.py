@@ -80,13 +80,12 @@ class Play:
         print(888)
         click = pygame.mouse.get_pressed()
         if x + w > mouse[0] > x and y + h > mouse[1] > y:
-            print(999)
             pygame.draw.rect(self.gameDisplay, ac, (x, y, w, h))
             if click[0] == 1:
-                print(101010)
+                print(action)
                 action()
         else:
-            print('0111111111')
+            print('2')
             pygame.draw.rect(self.gameDisplay, ic, (x, y, w, h))
         print(msg)
         TextSurf, TextRect = self.text_objects(msg, pygame.font.SysFont("Arial", 20))
