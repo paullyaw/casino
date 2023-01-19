@@ -1,7 +1,7 @@
 from casinosocket import socketprocessor
 import pygame as pg
 import time
-
+pg.init()
 COLOR_INACTIVE = (255, 255, 255)
 COLOR_ACTIVE = (50, 50, 250)
 FONT = pg.font.Font(None, 32)
@@ -84,21 +84,24 @@ class changecatalog:
     def __init__(self, table, id, socket):
         pg.init()
 
-        self.screen = pg.display
-        self.screen.set_mode(((384, 135)))
         self.socket = socket
         self.id = id
         self.table = table
-        if self.table == 'login':
-            self.screen.set_caption("Смена логина")
-            self.input_box1 = InputBox(10, 10, 14, 32, 'login')
-        else:
-            self.screen.set_caption('Смена пароля')
-            self.input_box1 = InputBox(10, 10, 14, 32, 'password')
+
 
     def render(self):
-
-
+        print(1)
+        pg.init()
+        print(2)
+        self.screen = pg.display.set_mode((384, 135))
+        print(3)
+        if self.table == 'login':
+            pg.display.set_caption("Смена логина")
+            self.input_box1 = InputBox(10, 10, 14, 32, 'login')
+        else:
+            pg.display.set_caption('Смена пароля')
+            self.input_box1 = InputBox(10, 10, 14, 32, 'password')
+        print(4)
         logo = pg.image.load('logopic.jpg').convert()
         input_boxes = [self.input_box1]
         buttons = [Button(220, 10, 56, 56, self.table, self.input_box1, self.socket)]
@@ -120,11 +123,13 @@ class changecatalog:
                 for box in input_boxes:
                     box.update()
 
-                self.screen.set_mode((384, 135)).fill((10, 10, 30))
+                self.screen.fill((10, 10, 30))
                 for box in input_boxes:
-                    box.draw(self.screen.set_mode((384, 135)))
+                    box.draw(self.screen)
                 for btn in buttons:
-                    btn.draw(self.screen.set_mode((384, 135)))
+                    btn.draw(self.screen)
 
-                self.screen.flip()
-        pg.quit()
+                pg.display.flip()
+        pg.display.quit()
+
+

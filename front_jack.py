@@ -18,8 +18,6 @@ class Play:
         self.dealer = Hand()
         self.player = Hand()
         self.deck.shuffle()
-        self.gameDisplay = pygame.display.set_mode((display_width, display_height))
-        pygame.display.set_caption('BlackJack')
 
 
     def blackjack(self):
@@ -49,7 +47,9 @@ class Play:
         self.dealer.value = 0
 
     def text_objects(self, text, font):
+        print(font, text, black)
         textSurface = font.render(text, True, black)
+        print('r_t_o')
         return textSurface, textSurface.get_rect()
 
     def end_text_objects(self, text, font, color):
@@ -78,17 +78,23 @@ class Play:
 
     # button display
     def button(self, msg, x, y, w, h, ic, ac, action=None):
+        print(777)
         mouse = pygame.mouse.get_pos()
+        print(888)
         click = pygame.mouse.get_pressed()
         if x + w > mouse[0] > x and y + h > mouse[1] > y:
+            print(999)
             pygame.draw.rect(self.gameDisplay, ac, (x, y, w, h))
             if click[0] == 1:
+                print(101010)
                 action()
         else:
+            print('0111111111')
             pygame.draw.rect(self.gameDisplay, ic, (x, y, w, h))
-
+        print(msg)
         TextSurf, TextRect = self.text_objects(msg, font)
         TextRect.center = ((x + (w / 2)), (y + (h / 2)))
+        print(131313131313)
         self.gameDisplay.blit(TextSurf, TextRect)
 
     def deal(self):
@@ -183,22 +189,25 @@ class Play:
 
     def render(self):
         pygame.init()
+        self.gameDisplay = pygame.display.set_mode((display_width, display_height))
+        print(1, self.gameDisplay)
+        pygame.display.set_caption('BlackJack')
 
         self.run = True
 
-        self.ismain = 0
+        ismain = 0
         while self.run:
+            print(self.gameDisplay)
             self.clock.tick(2)
 
-            if self.ismain == 0:
+            if ismain == 0:
+                ismain = 1
                 self.gameDisplay.fill(background_color)
-
             pygame.draw.rect(self.gameDisplay, grey, pygame.Rect(0, 0, 250, 700))
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.run = False
                     break
-
             self.button("Deal", 30, 100, 150, 50, light_slat, dark_slat, self.deal)
             self.button("Hit", 30, 200, 150, 50, light_slat, dark_slat, self.hit)
             self.button("Stand", 30, 300, 150, 50, light_slat, dark_slat, self.stand)
@@ -206,5 +215,6 @@ class Play:
             pygame.display.update()
 
             pygame.display.flip()
-        pygame.quit()
+        pygame.display.quit()
+
 

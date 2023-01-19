@@ -223,16 +223,12 @@ class mainwindow:
 
 
 
-                pygame.display.flip()
+                    pygame.display.flip()
         if not running and board.hide:
-            board.hide = False
-            print(3)
+            pygame.display.quit()
             board.runninggame.render()
-            while board.runninggame.run:
-                pass
-            print(2)
+            board.hide = False
             self.render()
-            print(1)
         else:
             self.socket.ext()
             pygame.quit()

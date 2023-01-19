@@ -5,15 +5,15 @@ import pygame
 
 class Game:
     def __init__(self):
-        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
-        pygame.display.set_caption('Слоты')
         self.bg_image = pygame.image.load(bg_image).convert_alpha()
-        self.m = SlotMachine()
         self.clock = pygame.time.Clock()
         self.delta_time = 0
 
     def render(self):
         pygame.init()
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        pygame.display.set_caption('Слоты')
+        self.m = SlotMachine()
         self.start_time = pygame.time.get_ticks()
         self.run = True
         while self.run:
