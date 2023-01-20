@@ -1,6 +1,6 @@
 import pygame
 from casinosocket import socketprocessor
-from main import Game
+from slots3 import SlotGame
 import front_jack
 import changecatalog
 from field import fieldwindow
@@ -157,7 +157,7 @@ class Board:
                                                                            self.cell_size < \
                                                                      self.height else None)
         if coords == (0, 0):
-            self.runninggame = Game()
+            self.runninggame = SlotGame(self.id, self.chips, self.socket)
             self.hide = True
         elif coords == (1, 0):
             self.runninggame = front_jack.Play()
@@ -192,71 +192,71 @@ class mainwindow:
         pygame.init()
 
     def render(self):
-        try:
-            pygame.init()
-            size = int(self.monitorsettings.width * 0.8), int(self.monitorsettings.height * 0.8)
-            clock = pygame.time.Clock()
-            screen = pygame.display.set_mode(size)
-            pygame.display.set_caption("Queen of spades")
-            logo = pygame.image.load('logopic.jpg').convert()
-            pygame.display.set_icon(logo)
-            board = Board(8, 5, screen, self.id, 0, self.socket)
-            # 0, 0, 100 if desktop 0, 0, 20 if laptop
-            board.set_view(0, 0, int(sqrt((size[0] // 2 * size[1] // 2) // 40)))
-            running = True
-            bgimage = pygame.image.load('mainbackground.png').convert()
-            itt = 0
-            input_box = InputBox(0, size[1] - 60, 24, 60, 'chips count')
-            label_box = labelbox(size[0] // 6, size[1] - 60, 24, 60)
-            while running:
-                for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
+        #try:
+        pygame.init()
+        size = int(self.monitorsettings.width * 0.8), int(self.monitorsettings.height * 0.8)
+        clock = pygame.time.Clock()
+        screen = pygame.display.set_mode(size)
+        pygame.display.set_caption("Queen of spades")
+        logo = pygame.image.load('logopic.jpg').convert()
+        pygame.display.set_icon(logo)
+        board = Board(8, 5, screen, self.id, 0, self.socket)
+        # 0, 0, 100 if desktop 0, 0, 20 if laptop
+        board.set_view(0, 0, int(sqrt((size[0] // 2 * size[1] // 2) // 40)))
+        running = True
+        bgimage = pygame.image.load('mainbackground.png').convert()
+        itt = 0
+        input_box = InputBox(0, size[1] - 60, 24, 60, 'chips count')
+        label_box = labelbox(size[0] // 6, size[1] - 60, 24, 60)
+        while running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                    self.socket.ext()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    board.on_click(event.pos)
+                    if board.hide:
                         running = False
-                        self.socket.ext()
-                    if event.type == pygame.MOUSEBUTTONDOWN:
-                        board.on_click(event.pos)
-                        if board.hide:
-                            running = False
-                            break
-                    input_box.handle_event(event)
-                if not running:
-                    break
-                sprite = bgimage
-                sprite.set_colorkey((255, 255, 255))
-                obj_rect = sprite.get_rect()
-                scale = pygame.transform.scale(
-                    sprite, (sprite.get_width(),
-                             sprite.get_height()))
+                        break
+                input_box.handle_event(event)
+            if not running:
+                break
+            sprite = bgimage
+            sprite.set_colorkey((255, 255, 255))
+            obj_rect = sprite.get_rect()
+            scale = pygame.transform.scale(
+                sprite, (sprite.get_width(),
+                         sprite.get_height()))
 
-                scale_rect = scale.get_rect()
+            scale_rect = scale.get_rect()
 
-                screen.blit(scale, scale_rect)
+            screen.blit(scale, scale_rect)
 
-                print(2)
-                board.render(screen)
-                print(1)
-                label_box.handle_event(self.socket.getchips(self.id))
-                print(self.socket.getchips(self.id))
-                label_box.update()
-                input_box.update()
-                label_box.draw(screen)
-                input_box.draw(screen)
-                board.chips = int(input_box.text) if input_box.text.isnumeric() else 0
+            print(2)
+            board.render(screen)
+            print(1)
+            label_box.handle_event(self.socket.getchips(self.id))
+            print(self.socket.getchips(self.id))
+            label_box.update()
+            input_box.update()
+            label_box.draw(screen)
+            input_box.draw(screen)
+            board.chips = int(input_box.text) if input_box.text.isnumeric() else 0
 
-                pygame.display.flip()
-                pygame.display.update(obj_rect)
+            pygame.display.flip()
+            pygame.display.update(obj_rect)
 
-                clock.tick(120)
+            clock.tick(120)
 
 
-            if not running and board.hide:
-                pygame.display.quit()
-                board.runninggame.render()
-                board.hide = False
-                self.render()
-            else:
-                self.socket.ext()
-                pygame.quit()
-        except:
+        if not running and board.hide:
+            pygame.display.quit()
+            board.runninggame.render()
+            board.hide = False
+            self.render()
+        else:
             self.socket.ext()
-            sys.exit()
+            pygame.quit()
+        #except:
+            #self.socket.ext()
+            #sys.exit()

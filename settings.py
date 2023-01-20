@@ -2,14 +2,13 @@
 DEFAULT_IMAGE_SIZE = (300, 300)
 FPS = 120
 HEIGHT = 1000
-WIDTH = 1600
+WIDTH = 1700
 START_X, START_Y = 0, -300
-X_OFFSET, Y_OFFSET = 20, 0
+X_OFFSET, Y_OFFSET = 30, 0
 
-# Картинки
-bg_image = 'pic/pictures/bg.png'
-GAME_INDICES = [1, 2, 3]
+GAME_INDICES = [1, 2, 3]  # индексы для выигрышей
 
+# символы
 symbols = {
     'diamond': f"pic/pictures/symbols/5.png",
     'floppy': f"pic/pictures/symbols/1.png",
