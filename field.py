@@ -72,6 +72,7 @@ class Board:
         self.id = id
         self.socket = socket
         self.done = False
+        self.cashcells = 0
 
     def set_view(self, left, top, cell_size):
         self.left = left
@@ -118,7 +119,7 @@ class Board:
                                                                            self.cell_size < \
                                                                            self.height else None
         if cell != None and self.done == False:
-            self.board[cell[1]][cell[0]] = 3 if self.board[cell[1]][cell[0]] == 0 else 4 if self.board[cell[1]][cell[0]] == 1 else self.board[cell[1]][cell[0]]
+            self.board[cell[1]][cell[0]] = 4 if self.board[cell[1]][cell[0]] == 0 else 3 if self.board[cell[1]][cell[0]] == 1 else self.board[cell[1]][cell[0]]
             if self.board[cell[1]][cell[0]] == 4:
                 self.done = True
                 self.bet = 0
@@ -129,11 +130,16 @@ class Board:
 
 
             else:
+                self.cashcells += 1
                 pygame.mixer.music.load("congrats.mp3")
                 pygame.mixer.music.play(0)
 
                 self.label.handle_event(int(self.label.text[12:]) + self.bet)
                 self.bet *= 2
+                if self.cashcells == 5:
+                    self.done = True
+                    pygame.mixer.music.load("winfield.mp3")
+                    pygame.mixer.music.play(0)
 
 
 class fieldwindow:
