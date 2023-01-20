@@ -16,7 +16,7 @@ class labelbox:
         self.txt_surface = pygame.font.Font(None, 32).render(text, True, self.color)
     def handle_event(self, chips):
         if chips.isnumeric():
-            self.txt_surface = pygame.font.Font(None, 32).render('Balance: ' + str(int(chips) * 10) + 'р.', True, self.color)
+            self.txt_surface = pygame.font.Font(None, 32).render('Balance: ' + str(chips) + 'р.', True, self.color)
         else:
             self.txt_surface = pygame.font.Font(None, 32).render(self.text, True, self.color)
 
@@ -161,7 +161,7 @@ class Board:
             self.runninggame = front_jack.Play()
             self.hide = True
         elif coords == (2, 0):
-            self.runninggame = fieldwindow(self.id, 1, self.chips, self.socket)
+            self.runninggame = fieldwindow(self.id, self.chips, self.socket)
             self.hide = True
         elif coords == (0, 4):
             self.runninggame = changecatalog.changecatalog('login', self.id, self.socket)
@@ -196,14 +196,14 @@ class mainwindow:
         pygame.display.set_caption("Queen of spades")
         logo = pygame.image.load('logopic.jpg').convert()
         pygame.display.set_icon(logo)
-        board = Board(8, 5, screen, self.id, self.chips, self.socket)
+        board = Board(8, 5, screen, self.id, 0, self.socket)
         # 0, 0, 100 if desktop 0, 0, 20 if laptop
         board.set_view(0, 0, 100)
         running = True
         bgimage = pygame.image.load('mainbackground.png').convert()
         itt = 0
         input_box = InputBox(0, 700, 24, 60, 'chips count')
-        label_box = labelbox(300, 700, 24, 60, 'Balance: ')
+        label_box = labelbox(300, 700, 24, 60)
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -234,15 +234,15 @@ class mainwindow:
             board.render(screen)
             print(1)
             label_box.handle_event(self.socket.getchips(self.id))
+            print(self.socket.getchips(self.id))
             label_box.update()
             input_box.update()
             label_box.draw(screen)
             input_box.draw(screen)
-
-
+            board.chips = int(input_box.text) if input_box.text.isnumeric() else 0
 
             pygame.display.flip()
-            clock.tick(3)
+            clock.tick(120)
 
 
         if not running and board.hide:

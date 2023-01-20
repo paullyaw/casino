@@ -46,7 +46,6 @@ class Play:
 
     def text_objects(self, text, font):
         textSurface = pygame.font.SysFont("Arial", 20).render(text, True, black)
-        print('r_t_o')
         return textSurface, textSurface.get_rect()
 
     def end_text_objects(self, text, font, color):
@@ -75,22 +74,16 @@ class Play:
 
     # button display
     def button(self, msg, x, y, w, h, ic, ac, action=None):
-        print(777)
         mouse = pygame.mouse.get_pos()
-        print(888)
         click = pygame.mouse.get_pressed()
         if x + w > mouse[0] > x and y + h > mouse[1] > y:
             pygame.draw.rect(self.gameDisplay, ac, (x, y, w, h))
             if click[0] == 1:
-                print(action)
                 action()
         else:
-            print('2')
             pygame.draw.rect(self.gameDisplay, ic, (x, y, w, h))
-        print(msg)
         TextSurf, TextRect = self.text_objects(msg, pygame.font.SysFont("Arial", 20))
         TextRect.center = ((x + (w / 2)), (y + (h / 2)))
-        print(131313131313)
         self.gameDisplay.blit(TextSurf, TextRect)
 
     def deal(self):
@@ -167,7 +160,7 @@ class Play:
             self.play_or_exit()
 
     def exit(self):
-        sys.exit()
+        self.run = False
 
     def play_or_exit(self):
         self.game_texts("Play again press Deal!", 200, 80)
@@ -186,15 +179,13 @@ class Play:
     def render(self):
         pygame.init()
         self.gameDisplay = pygame.display.set_mode((display_width, display_height))
-        print(1, self.gameDisplay)
         pygame.display.set_caption('BlackJack')
 
         self.run = True
 
         ismain = 0
         while self.run:
-            print(self.gameDisplay)
-            self.clock.tick(2)
+            self.clock.tick(60)
 
             if ismain == 0:
                 ismain = 1

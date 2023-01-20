@@ -1,48 +1,49 @@
 import pygame
 import random
 
-class InputBox:
-    def __init__(self, x, y, w, h, text=''):
-        self.downcount = 0
+COLOR_INACTIVE = (255, 255, 255)
+COLOR_ACTIVE = (50, 50, 250)
+
+
+
+class Button:
+    def __init__(self, x, y, w, h, type, boxes, id, socket):
         self.rect = pygame.Rect(x, y, w, h)
-        self.color = COLOR_INACTIVE
-        self.text = text
-        self.txt_surface = pygame.font.Font(None, 32).render(text, True, self.color)
+        self.color = (255, 255, 255)
+        self.boxes = boxes
+        self.type = type
+        self.txt_surface = pygame.font.Font(None, 24).render(type, True, COLOR_ACTIVE)
         self.active = False
+        self.done = False
+        self.profile = ()
+        self.socket = socket
+        self.id = id
 
     def handle_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
-            # If the user clicked on the input_box rect.
             if self.rect.collidepoint(event.pos):
-                # Toggle the active variable.
-                self.active = not self.active
-                if self.downcount == 0:
-                    self.text = ''
-                    self.downcount += 1
-            else:
-                self.active = False
-            # Change the current color of the input box.
-            self.color = COLOR_ACTIVE if self.active else COLOR_INACTIVE
-        if event.type == pygame.KEYDOWN:
-            if self.active:
-                if event.key == pygame.K_BACKSPACE:
-                    self.text = self.text[:-1]
-                else:
-                    self.text += event.unicode
-                # Re-render the text.
-                self.txt_surface = pygame.font.Font(None, 32).render(self.text, True, self.color)
+                    if self.type == 'regenerate':
+                        self.socket.addchips(self.id, self.boxes[0].text[12:])
+                        self.done = True
+
+
+
+    def draw(self, screen):
+        # Blit the rect.
+        pygame.draw.rect(screen, self.color, self.rect)
+        # Blit the text.
+        screen.blit(self.txt_surface, (self.rect.x + 5, self.rect.y + 5))
 
 class labelbox:
-    def __init__(self, x, y, w, h, text='Balance: ----р.'):
+    def __init__(self, x, y, w, h, text='Ваш выигрыш: 0'):
         self.rect = pygame.Rect(x, y, w, h)
         self.color = COLOR_INACTIVE
         self.text = text
         self.txt_surface = pygame.font.Font(None, 32).render(text, True, self.color)
+
     def handle_event(self, chips):
-        if chips.isnumeric():
-            self.txt_surface = pygame.font.Font(None, 32).render('Balance: ' + str(int(chips) * 10) + 'р.', True, self.color)
-        else:
-            self.txt_surface = pygame.font.Font(None, 32).render(self.text, True, self.color)
+        self.txt_surface = pygame.font.Font(None, 32).render('Ваш выигрыш: ' + str(int(chips)), True, self.color)
+        self.text = 'Ваш выигрыш: ' + str(int(chips))
 
 
     def draw(self, screen):
@@ -57,8 +58,10 @@ class labelbox:
         self.rect.w = width
 
 class Board:
-    def __init__(self, width, height, board, screen, id, socket):
+    def __init__(self, width, height, board, screen, bet, id, label, socket):
         self.width = width
+        self.bet = bet // 2
+        self.label = label
         self.height = height
         self.board = board
         self.left = 10
@@ -118,14 +121,27 @@ class Board:
             self.board[cell[1]][cell[0]] = 3 if self.board[cell[1]][cell[0]] == 0 else 4 if self.board[cell[1]][cell[0]] == 1 else self.board[cell[1]][cell[0]]
             if self.board[cell[1]][cell[0]] == 4:
                 self.done = True
+                self.bet = 0
+                self.label.handle_event(0)
+                pygame.mixer.music.load("death.mp3")
+                pygame.mixer.music.play(0)
+
+
+
+            else:
+                pygame.mixer.music.load("congrats.mp3")
+                pygame.mixer.music.play(0)
+
+                self.label.handle_event(int(self.label.text[12:]) + self.bet)
+                self.bet *= 2
 
 
 class fieldwindow:
-    def __init__(self, id, bet, totalchips, socket):
+    def __init__(self, id, bet, socket):
         self.socket = socket
+        self.socket.addchips(id, -bet)
         self.id = id
         self.bet = bet
-        self.totalchips = totalchips
         pygame.init()
 
     def render(self):
@@ -138,22 +154,55 @@ class fieldwindow:
         random.shuffle(generated)
         generated = [[generated[h * i + j] for j in range(h)] for i in range(w)]
         print(generated)
-        board = Board(3, 4, generated, screen, 1, 1)
-        board.set_view(0, 0, 200)
         running = True
         itt = 0
+        self.run = True
+        self.input_box = labelbox(0, 805, 450, 50)
+        input_boxes = [self.input_box]
+        buttons = [Button(500, 805, 100, 100, 'regenerate', input_boxes, self.id, self.socket)]
+        board = Board(3, 4, generated, screen, self.bet, self.id, self.input_box, self.socket)
+        board.set_view(0, 0, 200)
+
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    self.socket.addchips(self.id, int(self.input_box.text[12:]))
                     running = False
+                    break
                 if itt == 0:
                     itt = 1
                     screen.fill((0, 0, 0))
                     board.render(screen)
+                    for btn in buttons:
+                        btn.handle_event(event)
+                        if btn.done:
+                            self.run = False
+                            running = False
+                            break
+                    if self.run:
+                        for box in input_boxes:
+                            box.update()
+
+                        for box in input_boxes:
+                            box.draw(screen)
+                        for btn in buttons:
+                            btn.draw(screen)
+
                     pygame.display.flip()
+
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     board.on_click(event.pos)
                     itt = 0
+                for btn in buttons:
+                    btn.handle_event(event)
+                    if btn.done:
+                        self.run = False
+
+
+        if not self.run:
+            pygame.quit()
+            self.render()
+
         pygame.quit()
 
 
