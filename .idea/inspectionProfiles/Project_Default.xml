@@ -1,0 +1,51 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyChainedComparisonsInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoreConstantInTheMiddle" value="true" />
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N806" />
+          <option value="N803" />
+          <option value="N801" />
+          <option value="N802" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyShadowingBuiltinsInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredNames">
+        <list>
+          <option value="list" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="builtins.ord.*" />
+          <option value="set.__getitem__" />
+          <option value="int.split" />
+          <option value="str.append" />
+          <option value="configparser.TOKEN" />
+          <option value="config.*" />
+          <option value="str.iisdecimal" />
+          <option value="list.__getitem__" />
+          <option value="list.lower" />
+          <option value="str.normal_form" />
+          <option value="docx.Document.add_paragraph" />
+          <option value="main.font" />
+          <option value="pptx.text" />
+          <option value="pptx.enum.shapes.MSO_SHAPE" />
+          <option value="qt5_applications.Qt.plugins.platforms.qdirect2d" />
+          <option value="PyQt5.QtGui.Qt.gray" />
+          <option value="PyQt5.QtGui.Qt.white" />
+          <option value="PyQt5.QtWidgets.palette.setColor" />
+          <option value="logoge.win32gui" />
+          <option value="logoge.win32con" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

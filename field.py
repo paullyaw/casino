@@ -85,9 +85,9 @@ class Board:
             for j in range(self.width):
                 gameicon = None
                 if self.board[i][j] == 3:
-                    gameicon = pygame.image.load('cash.jpg').convert()
+                    gameicon = pygame.image.load('pic/pictures/cash.jpg').convert()
                 if self.board[i][j] == 4:
-                    gameicon = pygame.image.load('bomb.jpg').convert()
+                    gameicon = pygame.image.load('pic/pictures/bomb.jpg').convert()
                 if gameicon != None:
                     gameicon.set_colorkey((255, 255, 255))
                     pygame.draw.rect(surface, wcolor, (self.left + self.cell_size * j, self.top + self.cell_size * i,
@@ -124,21 +124,21 @@ class Board:
                 self.done = True
                 self.bet = 0
                 self.label.handle_event(0)
-                pygame.mixer.music.load("death.mp3")
+                pygame.mixer.music.load("sounds/death.mp3")
                 pygame.mixer.music.play(0)
 
 
 
             else:
                 self.cashcells += 1
-                pygame.mixer.music.load("congrats.mp3")
+                pygame.mixer.music.load("sounds/congrats.mp3")
                 pygame.mixer.music.play(0)
 
                 self.label.handle_event(int(self.label.text[12:]) + self.bet)
                 self.bet *= 2
                 if self.cashcells == 5:
                     self.done = True
-                    pygame.mixer.music.load("winfield.mp3")
+                    pygame.mixer.music.load("sounds/winfield.mp3")
                     pygame.mixer.music.play(0)
 
 

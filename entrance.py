@@ -86,7 +86,7 @@ class InputBox:
 class entrance:
     def render(self):
         pg.display.set_caption("Вход/Регистрация")
-        logo = pg.image.load('logopic.jpg').convert()
+        logo = pg.image.load('pic/pictures//logopic.jpg').convert()
         pg.display.set_icon(logo)
         clock = pg.time.Clock()
         input_box1 = InputBox(10, 10, 14, 32, 'login')
