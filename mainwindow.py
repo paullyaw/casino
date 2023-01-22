@@ -1,7 +1,7 @@
 import pygame
 from casinosocket import socketprocessor
 from slots3 import SlotGame
-import front_jack
+from slots5 import SlotGame2
 import changecatalog
 from field import fieldwindow
 from math import sqrt
@@ -72,9 +72,7 @@ class InputBox:
         self.rect.w = width
 
     def draw(self, screen):
-        # Blit the text.
         screen.blit(self.txt_surface, (self.rect.x+5, self.rect.y+5))
-        # Blit the rect.
         pygame.draw.rect(screen, self.color, self.rect, 2)
 
 
@@ -105,17 +103,19 @@ class Board:
             for j in range(self.width):
                 gameicon = None
                 if i == 0 and j == 0:
-                    gameicon = pygame.image.load('slotsicon.jpg').convert()
+                    gameicon = pygame.image.load('pic/pictures/slotsicon.jpg').convert()
+                if i == 0 and j == 3:
+                    gameicon = pygame.image.load('pic/pictures/slotsicon.jpg').convert()
                 if i == 0 and j == 1:
-                    gameicon = pygame.image.load('poker.png').convert()
+                    gameicon = pygame.image.load('pic/pictures/poker.png').convert()
                 if i == 4 and j == 0:
-                    gameicon = pygame.image.load('changelogin.png').convert()
+                    gameicon = pygame.image.load('pic/pictures/changelogin.png').convert()
                 if i == 4 and j == 1:
-                    gameicon = pygame.image.load('changepassword.png').convert()
+                    gameicon = pygame.image.load('pic/pictures/changepassword.png').convert()
                 if i == 0 and j == 2:
-                    gameicon = pygame.image.load('cash.jpg').convert()
+                    gameicon = pygame.image.load('pic/pictures/cash.jpg').convert()
                 if i == 4 and j == 2:
-                    gameicon = pygame.image.load('buychips.jpg').convert()
+                    gameicon = pygame.image.load('pic/pictures/buychips.jpg').convert()
                 if gameicon != None:
                     gameicon.set_colorkey((255, 255, 255))
                     obj_rect = gameicon.get_rect(
@@ -159,8 +159,11 @@ class Board:
         if coords == (0, 0):
             self.runninggame = SlotGame(self.id, self.chips, self.socket)
             self.hide = True
+        elif coords == (3, 0):
+            self.runninggame = SlotGame2(self.id, self.chips, self.socket)
+            self.hide = True
         elif coords == (1, 0):
-            self.runninggame = front_jack.Play()
+            self.runninggame = None
             self.hide = True
         elif coords == (2, 0):
             self.runninggame = fieldwindow(self.id, self.chips, self.socket)
@@ -198,13 +201,13 @@ class mainwindow:
         clock = pygame.time.Clock()
         screen = pygame.display.set_mode(size)
         pygame.display.set_caption("Queen of spades")
-        logo = pygame.image.load('logopic.jpg').convert()
+        logo = pygame.image.load('pic/pictures/logopic.jpg').convert()
         pygame.display.set_icon(logo)
         board = Board(8, 5, screen, self.id, 0, self.socket)
         # 0, 0, 100 if desktop 0, 0, 20 if laptop
         board.set_view(0, 0, int(sqrt((size[0] // 2 * size[1] // 2) // 40)))
         running = True
-        bgimage = pygame.image.load('mainbackground.png').convert()
+        bgimage = pygame.image.load('pic/pictures/mainbackground.png').convert()
         itt = 0
         input_box = InputBox(0, size[1] - 60, 24, 60, 'chips count')
         label_box = labelbox(size[0] // 6, size[1] - 60, 24, 60)
@@ -251,9 +254,14 @@ class mainwindow:
 
         if not running and board.hide:
             pygame.display.quit()
-            board.runninggame.render()
             board.hide = False
+            if board.runninggame != None:
+                board.runninggame.render()
+            else:
+                import front_jack
+                front_jack.render(self.id, int(input_box.text) if input_box.text.isnumeric() else 0, self.socket)
             self.render()
+
         else:
             self.socket.ext()
             pygame.quit()

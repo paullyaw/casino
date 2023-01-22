@@ -106,7 +106,7 @@ class entrance:
                     btn.handle_event(event)
                     if btn.done:
                         pg.quit()
-                        window = mainwindow(btn.profile[0], btn.profile[1].split('|')[1], btn.profile[1].split('|')[2], btn.profile[1].split('|')[1], btn.socket)
+                        window = mainwindow(btn.profile[0], btn.profile[1].split('|')[1], btn.profile[1].split('|')[2], btn.profile[1].split('|')[0], btn.socket)
                         window.render()
                         done = True
 
